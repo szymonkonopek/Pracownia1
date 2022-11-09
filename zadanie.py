@@ -1,12 +1,13 @@
 """To jest szablon do stworzenia rozwiazania"""
 
 import time, numpy as np
+from typing import List
 import sortowania, wykresy, uklad
 import gauss, gaussjordan, cholesky, banachiewicz
 import iteracjaprosta, iteracjaseidela
 
 class Zadanie:
-    def __init__(self, n = 1000, M = 10, N = 10):
+    def __init__(self, n = 300, M = 6, N = 26):
         """Konstruktor okreslajacy parametry eksperymentu"""
         self.n = n                          # maksymalny rozmiar macierzy
         self.M = M                          # liczba pomiarow
@@ -15,14 +16,23 @@ class Zadanie:
         self.czasy: List[List] = [[], []]   # lista czasow rozwiazywania
         
     def mierz_czas(self, metoda, k):
-        """Metoda mierzaca czas rozwiazywania problemu wybrana metoda
-            k - rozmiar macierzy"""
         czas = 0.0
-        # tworzymy obiekt klasy Uklad
-        
-        # tworzymy petle, w ktorej bedziemy mierzyc czas rozwiazywania
-        # ukladu n rownan self.pomiary razy
-        
+        ukl = uklad.Uklad(k)
+        for _ in range(self.M):
+            ukl.losuj_uklad_symetryczny_dodatnio_okreslony()
+            if (metoda == 1):
+                m1 = banachiewicz.Banachiewicz(ukl)
+                stoper = time.time()
+                m1.rozklad()
+                m1.rozwiaz_trojkatny_dolny()
+                m1.rozwiaz_trojkatny_gorny()
+                czas = time.time() - stoper
+            elif (metoda == 2):
+                m2 = gauss.Gauss(ukl)
+                stoper = time.time()
+                m2.eliminacja()
+                m2.rozwiaz_trojkatny()
+                czas = time.time() - stoper
         return czas/self.M
     
     def badaj_zlozonosc(self, metoda, opis):

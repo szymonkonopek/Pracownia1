@@ -50,15 +50,19 @@ def testy(typ):
     elif typ == 4:
         """Miejsce na rozwiazanie - przygotowanie"""
         # tworzymy obiekt klasy Uklad
-        
+        ukl = uklad.Uklad(120)
         # losujemy odpowiedni uklad rownan
-        
+        ukl.losuj_uklad_symetryczny_dodatnio_okreslony()
         # tworzymy obiekt klasy odpowiadajacej metodzie
-        
+        ban = banachiewicz.Banachiewicz(ukl)
         # uruchamiamy stoper
         stoper = time.time()
         # wywolujemy odpowiednie metody
-        
+    
+        ban.rozklad()
+        ban.rozwiaz_trojkatny_dolny()
+        ban.rozwiaz_trojkatny_gorny()
+ 
         # zatrzymujemy stoper
         czas = time.time() - stoper
         # wyswietlamy czas rozwiazywania ukladu
@@ -69,8 +73,8 @@ def testy(typ):
         zad1 = zadanie.Zadanie()
         # badamy zlozonosc obliczeniowa wybranej metody
         zad1.badaj_zlozonosc(
-            metoda = 1,
-            opis = "Metoda ..."
+            metoda = 2,
+            opis = "Metoda Gaussa"
         )
     elif typ == 6:
         # porownujemy metody
@@ -78,10 +82,13 @@ def testy(typ):
         zad2 = zadanie.Zadanie()
         # badamy zlozonosc obliczeniowa wybranej metody
         zad2.porownaj_metody(
-            nazwa_metody1 = "Metoda ...",
-            nazwa_metody2 = "Metoda ..."
+            nazwa_metody1 = "Metoda Banachiewicza",
+            nazwa_metody2 = "Metoda Gaussa"
         )
         
 if __name__ == '__main__':
-    testy(1)
-    
+    zad = zadanie.Zadanie()
+    #testy(5)
+    #print(zad.mierz_czas(2,300))
+    #zad.badaj_zlozonosc(2, "Metoda Banachiewicza")
+    zad.porownaj_metody("Metoda Banachiewicza", "Metoda Gaussa")
