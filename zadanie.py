@@ -19,8 +19,8 @@ class Zadanie:
         czas = 0.0
         ukl = uklad.Uklad(k)
         for _ in range(self.M):
-            ukl.losuj_uklad_symetryczny_dodatnio_okreslony()
             if (metoda == 1):
+                ukl.losuj_uklad_symetryczny_dodatnio_okreslony()
                 m1 = banachiewicz.Banachiewicz(ukl)
                 stoper = time.time()
                 m1.rozklad()
@@ -28,6 +28,7 @@ class Zadanie:
                 m1.rozwiaz_trojkatny_gorny()
                 czas = time.time() - stoper
             elif (metoda == 2):
+                ukl.losuj_uklad()
                 m2 = gauss.Gauss(ukl)
                 stoper = time.time()
                 m2.eliminacja()

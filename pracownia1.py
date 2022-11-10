@@ -58,11 +58,10 @@ def testy(typ):
         # uruchamiamy stoper
         stoper = time.time()
         # wywolujemy odpowiednie metody
-    
         ban.rozklad()
         ban.rozwiaz_trojkatny_dolny()
         ban.rozwiaz_trojkatny_gorny()
- 
+
         # zatrzymujemy stoper
         czas = time.time() - stoper
         # wyswietlamy czas rozwiazywania ukladu
@@ -87,8 +86,4 @@ def testy(typ):
         )
         
 if __name__ == '__main__':
-    zad = zadanie.Zadanie()
-    #testy(5)
-    #print(zad.mierz_czas(2,300))
-    #zad.badaj_zlozonosc(2, "Metoda Banachiewicza")
-    zad.porownaj_metody("Metoda Banachiewicza", "Metoda Gaussa")
+    testy(6)
